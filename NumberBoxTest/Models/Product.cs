@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NumberBoxTest.Models {
+
     class Product : INotifyPropertyChanged {
         
         private string _productName;

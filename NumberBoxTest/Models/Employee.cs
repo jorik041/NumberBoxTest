@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace NumberBoxTest.Models {
 
     class Employee : INotifyPropertyChanged {
+
         private string _name;
         private decimal _salary;
         private double? _bonus;

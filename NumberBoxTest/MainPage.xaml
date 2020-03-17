@@ -74,16 +74,10 @@
             </winui:NumberBox>
 
             <winui:NumberBox Header="Bonus"
-                             Maximum="10000"
-                             Minimum="0"
                              NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              SmallChange="100"
                              SpinButtonPlacementMode="Compact"
-                             Text="{x:Bind ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}, Mode=TwoWay, Path=Employee.Bonus}">
-                <interactivity:Interaction.Behaviors>
-                    <behaviors:NanToMinimumBehavior />
-                </interactivity:Interaction.Behaviors>
-            </winui:NumberBox>
+                             Text="{x:Bind ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}, Mode=TwoWay, Path=Employee.Bonus}" />
 
             <winui:NumberBox Header="Age"
                              Maximum="100"
