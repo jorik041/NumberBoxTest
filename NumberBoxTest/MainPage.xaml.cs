@@ -1,4 +1,5 @@
-﻿using NumberBoxTest.Models;
+﻿using Microsoft.UI.Xaml.Controls;
+using NumberBoxTest.Models;
 using Windows.Globalization.NumberFormatting;
 using Windows.UI.Xaml.Controls;
 
@@ -9,20 +10,22 @@ namespace NumberBoxTest {
             this.InitializeComponent();
         }
 
-        private DecimalFormatter DutchDecimalFormatter { get; } = new DecimalFormatter(new[] { "nl-NL" }, "NL") {
-            IsGrouped = true,
-            FractionDigits = 2,
-            NumberRounder = new IncrementNumberRounder {
-                Increment = 0.01,
-                RoundingAlgorithm = RoundingAlgorithm.RoundHalfUp,
-            }
-        };
+        private DecimalFormatter DutchDecimalFormatter { get; } =
+            new DecimalFormatter(new[] { "nl-NL" }, "NL") {
+                IsGrouped = true,
+                FractionDigits = 2,
+                NumberRounder = new IncrementNumberRounder {
+                    Increment = 0.01,
+                    RoundingAlgorithm = RoundingAlgorithm.RoundHalfUp,
+                }
+            };
 
-        private DecimalFormatter IntFormatter { get; } = new DecimalFormatter(new[] { "nl-NL" }, "NL") {
-            IsGrouped = false,
-            FractionDigits = 0,
-            NumberRounder = new IncrementNumberRounder(),
-        };
+        private DecimalFormatter IntFormatter { get; } =
+            new DecimalFormatter(new[] { "nl-NL" }, "NL") {
+                IsGrouped = false,
+                FractionDigits = 0,
+                NumberRounder = new IncrementNumberRounder(),
+            };
 
         internal Employee Employee { get; } = new Employee {
             Name = "Fons",
@@ -37,7 +40,8 @@ namespace NumberBoxTest {
             UnitsInStock = 50
         };
 
-        private void NumberBox_ValueChanged(Microsoft.UI.Xaml.Controls.NumberBox sender, Microsoft.UI.Xaml.Controls.NumberBoxValueChangedEventArgs args) {
+        private void NumberBox_ValueChanged(NumberBox sender, 
+                                            NumberBoxValueChangedEventArgs args) {
             if (double.IsNaN(args.NewValue)) {
                 sender.Value = sender.Minimum;
             }

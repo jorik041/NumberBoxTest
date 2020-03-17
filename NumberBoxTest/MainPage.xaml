@@ -7,6 +7,7 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -15,10 +16,6 @@
         <converters:NullableDoubleToStringConverter x:Key="NullableDouble2String" />
     </Page.Resources>
 
-    <Page.Background>
-        <ThemeResource ResourceKey="ApplicationPageBackgroundThemeBrush" />
-    </Page.Background>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -26,75 +23,101 @@
         </Grid.ColumnDefinitions>
         <StackPanel Width="300"
                     Margin="8"
+                    x:DefaultBindMode="TwoWay"
                     Spacing="8">
 
-            <TextBox Header="ProductName"
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
+                       Text="Product" />
+
+            <TextBox Header="Product Name"
                      MaxLength="10"
-                     Text="{x:Bind Product.ProductName, Mode=TwoWay}"
+                     Text="{x:Bind Product.ProductName}"
                      TextWrapping="Wrap" />
 
             <winui:NumberBox AcceptsExpression="True"
-                             Header="UnitPrice"
+                             Header="Unit Price"
                              Minimum="0"
-                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
+                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter, Mode=OneTime}"
                              PlaceholderText="You can also use expressions like '5 + 7'"
                              ValueChanged="NumberBox_ValueChanged"
-                             Value="{x:Bind Product.UnitPrice, Mode=TwoWay}" />
+                             Value="{x:Bind Product.UnitPrice}" />
 
             <winui:NumberBox Header="Units in Stock"
                              Maximum="10000"
                              Minimum="0"
-                             NumberFormatter="{x:Bind Path=IntFormatter}"
+                             NumberFormatter="{x:Bind Path=IntFormatter, Mode=OneTime}"
                              SpinButtonPlacementMode="Inline"
                              ValueChanged="NumberBox_ValueChanged"
-                             Value="{x:Bind Product.UnitsInStock, Converter={StaticResource Int2Double}, Mode=TwoWay}" />
+                             Value="{x:Bind Product.UnitsInStock, Converter={StaticResource Int2Double}}" />
+
+            <StackPanel Margin="0,8"
+                        Padding="8"
+                        x:DefaultBindMode="OneWay"
+                        BorderBrush="{ThemeResource SystemErrorTextColor}"
+                        BorderThickness="2"
+                        Spacing="8">
+                <TextBlock Text="{x:Bind Product.ProductName}" />
+                <TextBlock Text="{x:Bind Product.UnitPrice}" />
+                <TextBlock Text="{x:Bind Product.UnitsInStock}" />
+            </StackPanel>
 
         </StackPanel>
 
         <StackPanel Grid.Column="1"
                     Width="300"
                     Margin="8"
+                    x:DefaultBindMode="TwoWay"
                     Spacing="8">
+
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
+                       Text="Employee" />
 
             <TextBox Header="Name"
                      MaxLength="10"
-                     Text="{x:Bind Employee.Name, Mode=TwoWay}"
+                     Text="{x:Bind Employee.Name}"
                      TextWrapping="Wrap" />
 
             <winui:NumberBox AcceptsExpression="True"
                              Header="Salary"
                              IsWrapEnabled="true"
                              Minimum="100"
-                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
+                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter, Mode=OneTime}"
                              SpinButtonPlacementMode="Hidden"
-                             Value="{x:Bind Employee.Salary, Converter={StaticResource Decimal2Double}, ConverterParameter=100, Mode=TwoWay}">
+                             Value="{x:Bind Employee.Salary, Converter={StaticResource Decimal2Double}}">
                 <interactivity:Interaction.Behaviors>
                     <behaviors:NanToMinimumBehavior />
                 </interactivity:Interaction.Behaviors>
             </winui:NumberBox>
 
             <winui:NumberBox Header="Bonus"
-                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
-                             SmallChange="100"
                              Minimum="0"
+                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter, Mode=OneTime}"
+                             SmallChange="100"
                              SpinButtonPlacementMode="Compact"
-                             Text="{x:Bind Employee.Bonus, ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}, Mode=TwoWay}" />
+                             Text="{x:Bind Employee.Bonus, ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}}" />
 
             <winui:NumberBox Header="Age"
                              Maximum="100"
                              Minimum="16"
-                             NumberFormatter="{x:Bind Path=IntFormatter}"
                              SpinButtonPlacementMode="Inline"
-                             Value="{x:Bind Employee.Age, Converter={StaticResource Int2Double}, Mode=TwoWay}">
+                             Value="{x:Bind Employee.Age, Converter={StaticResource Int2Double}}">
                 <interactivity:Interaction.Behaviors>
                     <behaviors:NanToMinimumBehavior />
+                    <behaviors:IntNumberFormatterBehavior />
                 </interactivity:Interaction.Behaviors>
             </winui:NumberBox>
 
-            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Name}" />
-            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Salary}" />
-            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Bonus}" />
-            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Age}" />
+            <StackPanel Margin="0,8"
+                        Padding="8"
+                        x:DefaultBindMode="OneWay"
+                        BorderBrush="{ThemeResource SystemErrorTextColor}"
+                        BorderThickness="2"
+                        Spacing="8">
+                <TextBlock Text="{x:Bind Employee.Name}" />
+                <TextBlock Text="{x:Bind Employee.Salary}" />
+                <TextBlock Text="{x:Bind Employee.Bonus}" />
+                <TextBlock Text="{x:Bind Employee.Age}" />
+            </StackPanel>
 
         </StackPanel>
     </Grid>
