@@ -1,11 +1,12 @@
 ﻿<Page x:Class="NumberBoxTest.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:behaviors="using:NumberBoxTest.Behaviors"
       xmlns:converters="using:NumberBoxTest.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -13,6 +14,10 @@
         <converters:IntToDoubleConverter x:Key="Int2Double" />
         <converters:NullableDoubleToStringConverter x:Key="NullableDouble2String" />
     </Page.Resources>
+
+    <Page.Background>
+        <ThemeResource ResourceKey="ApplicationPageBackgroundThemeBrush" />
+    </Page.Background>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,21 +30,24 @@
 
             <TextBox Header="ProductName"
                      MaxLength="10"
-                     Text="{x:Bind Product.ProductName, Mode=TwoWay}"
+                     Text="{x:Bind Mode=TwoWay, Path=Product.ProductName}"
                      TextWrapping="Wrap" />
 
             <winui:NumberBox AcceptsExpression="True"
                              Header="UnitPrice"
-                             NumberFormatter="{x:Bind DutchDecimalFormatter}"
+                             Minimum="0"
+                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              PlaceholderText="You can also use expressions like '5 + 7'"
-                             Value="{x:Bind Product.UnitPrice, Mode=TwoWay}" />
+                             ValueChanged="NumberBox_ValueChanged"
+                             Value="{x:Bind Mode=TwoWay, Path=Product.UnitPrice}" />
 
             <winui:NumberBox Header="Units in Stock"
                              Maximum="10000"
                              Minimum="0"
-                             NumberFormatter="{x:Bind IntFormatter}"
+                             NumberFormatter="{x:Bind Path=IntFormatter}"
                              SpinButtonPlacementMode="Inline"
-                             Value="{x:Bind Product.UnitsInStock, Converter={StaticResource Int2Double}, Mode=TwoWay}" />
+                             ValueChanged="NumberBox_ValueChanged"
+                             Value="{x:Bind Converter={StaticResource Int2Double}, Mode=TwoWay, Path=Product.UnitsInStock}" />
 
         </StackPanel>
 
@@ -50,35 +58,48 @@
 
             <TextBox Header="Name"
                      MaxLength="10"
-                     Text="{x:Bind Employee.Name, Mode=TwoWay}"
+                     Text="{x:Bind Mode=TwoWay, Path=Employee.Name}"
                      TextWrapping="Wrap" />
 
             <winui:NumberBox AcceptsExpression="True"
                              Header="Salary"
                              IsWrapEnabled="true"
-                             NumberFormatter="{x:Bind DutchDecimalFormatter}"
+                             Minimum="100"
+                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              SpinButtonPlacementMode="Hidden"
-                             Value="{x:Bind Employee.Salary, Mode=TwoWay, Converter={StaticResource Decimal2Double}}" />
+                             Value="{x:Bind Converter={StaticResource Decimal2Double}, ConverterParameter=100, Mode=TwoWay, Path=Employee.Salary}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:NanToMinimumBehavior />
+                </interactivity:Interaction.Behaviors>
+            </winui:NumberBox>
 
             <winui:NumberBox Header="Bonus"
                              Maximum="10000"
                              Minimum="0"
-                             NumberFormatter="{x:Bind DutchDecimalFormatter}"
+                             NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              SmallChange="100"
                              SpinButtonPlacementMode="Compact"
-                             Text="{x:Bind Employee.Bonus, Mode=TwoWay, Converter={StaticResource NullableDouble2String}, ConverterLanguage=nl-NL}" />
+                             Text="{x:Bind ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}, Mode=TwoWay, Path=Employee.Bonus}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:NanToMinimumBehavior />
+                </interactivity:Interaction.Behaviors>
+            </winui:NumberBox>
 
             <winui:NumberBox Header="Age"
                              Maximum="100"
                              Minimum="16"
-                             NumberFormatter="{x:Bind IntFormatter}"
+                             NumberFormatter="{x:Bind Path=IntFormatter}"
                              SpinButtonPlacementMode="Inline"
-                             Value="{x:Bind Employee.Age, Converter={StaticResource Int2Double}, ConverterParameter=16, Mode=TwoWay}" />
+                             Value="{x:Bind Converter={StaticResource Int2Double}, Mode=TwoWay, Path=Employee.Age}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:NanToMinimumBehavior />
+                </interactivity:Interaction.Behaviors>
+            </winui:NumberBox>
 
-            <TextBlock Text="{x:Bind Employee.Name, Mode=OneWay}" />
-            <TextBlock Text="{x:Bind Employee.Salary, Mode=OneWay}" />
-            <TextBlock Text="{x:Bind Employee.Bonus, Mode=OneWay}" />
-            <TextBlock Text="{x:Bind Employee.Age, Mode=OneWay}" />
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Name}" />
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Salary}" />
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Bonus}" />
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=Employee.Age}" />
 
         </StackPanel>
     </Grid>

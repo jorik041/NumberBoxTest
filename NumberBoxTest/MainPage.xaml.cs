@@ -38,7 +38,11 @@ namespace NumberBoxTest {
             UnitsInStock = 50
         };
 
-        
+        private void NumberBox_ValueChanged(Microsoft.UI.Xaml.Controls.NumberBox sender, Microsoft.UI.Xaml.Controls.NumberBoxValueChangedEventArgs args) {
+            if (double.IsNaN(args.NewValue)) {
+                sender.Value = sender.Minimum;
+            }
+        }
 
     }
 }

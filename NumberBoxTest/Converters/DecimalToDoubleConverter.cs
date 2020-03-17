@@ -13,7 +13,9 @@ namespace NumberBoxTest.Converters {
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
-            return double.IsNaN((double)value) ? 0M : (object)System.Convert.ToDecimal(value);
+            return double.IsNaN((double)value)
+                ? (parameter is object ? System.Convert.ToDecimal(parameter) : 0)
+                : System.Convert.ToDecimal(value);
         }
     }
 }

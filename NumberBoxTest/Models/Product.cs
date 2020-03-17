@@ -33,7 +33,7 @@ namespace NumberBoxTest.Models {
             get { return _unitPrice; }
             set {
                 if (_unitPrice != value) {
-                    _unitPrice = value;
+                    _unitPrice = double.IsNaN(value) ? 0 : value;
                     OnPropertyChanged(nameof(UnitPrice));
                 }
             }
