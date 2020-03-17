@@ -30,7 +30,7 @@
 
             <TextBox Header="ProductName"
                      MaxLength="10"
-                     Text="{x:Bind Mode=TwoWay, Path=Product.ProductName}"
+                     Text="{x:Bind Product.ProductName, Mode=TwoWay}"
                      TextWrapping="Wrap" />
 
             <winui:NumberBox AcceptsExpression="True"
@@ -39,7 +39,7 @@
                              NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              PlaceholderText="You can also use expressions like '5 + 7'"
                              ValueChanged="NumberBox_ValueChanged"
-                             Value="{x:Bind Mode=TwoWay, Path=Product.UnitPrice}" />
+                             Value="{x:Bind Product.UnitPrice, Mode=TwoWay}" />
 
             <winui:NumberBox Header="Units in Stock"
                              Maximum="10000"
@@ -47,7 +47,7 @@
                              NumberFormatter="{x:Bind Path=IntFormatter}"
                              SpinButtonPlacementMode="Inline"
                              ValueChanged="NumberBox_ValueChanged"
-                             Value="{x:Bind Converter={StaticResource Int2Double}, Mode=TwoWay, Path=Product.UnitsInStock}" />
+                             Value="{x:Bind Product.UnitsInStock, Converter={StaticResource Int2Double}, Mode=TwoWay}" />
 
         </StackPanel>
 
@@ -58,7 +58,7 @@
 
             <TextBox Header="Name"
                      MaxLength="10"
-                     Text="{x:Bind Mode=TwoWay, Path=Employee.Name}"
+                     Text="{x:Bind Employee.Name, Mode=TwoWay}"
                      TextWrapping="Wrap" />
 
             <winui:NumberBox AcceptsExpression="True"
@@ -67,7 +67,7 @@
                              Minimum="100"
                              NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              SpinButtonPlacementMode="Hidden"
-                             Value="{x:Bind Converter={StaticResource Decimal2Double}, ConverterParameter=100, Mode=TwoWay, Path=Employee.Salary}">
+                             Value="{x:Bind Employee.Salary, Converter={StaticResource Decimal2Double}, ConverterParameter=100, Mode=TwoWay}">
                 <interactivity:Interaction.Behaviors>
                     <behaviors:NanToMinimumBehavior />
                 </interactivity:Interaction.Behaviors>
@@ -76,15 +76,16 @@
             <winui:NumberBox Header="Bonus"
                              NumberFormatter="{x:Bind Path=DutchDecimalFormatter}"
                              SmallChange="100"
+                             Minimum="0"
                              SpinButtonPlacementMode="Compact"
-                             Text="{x:Bind ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}, Mode=TwoWay, Path=Employee.Bonus}" />
+                             Text="{x:Bind Employee.Bonus, ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}, Mode=TwoWay}" />
 
             <winui:NumberBox Header="Age"
                              Maximum="100"
                              Minimum="16"
                              NumberFormatter="{x:Bind Path=IntFormatter}"
                              SpinButtonPlacementMode="Inline"
-                             Value="{x:Bind Converter={StaticResource Int2Double}, Mode=TwoWay, Path=Employee.Age}">
+                             Value="{x:Bind Employee.Age, Converter={StaticResource Int2Double}, Mode=TwoWay}">
                 <interactivity:Interaction.Behaviors>
                     <behaviors:NanToMinimumBehavior />
                 </interactivity:Interaction.Behaviors>
