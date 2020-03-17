@@ -1,6 +1,5 @@
 ﻿using NumberBoxTest.Models;
 using Windows.Globalization.NumberFormatting;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace NumberBoxTest {
