@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="NumberBoxTest.Models.Employee">
+    <Position X="4.25" Y="0.5" Width="3.5" />
+    <Members>
+      <Field Name="_age" Hidden="true" />
+      <Field Name="_bonus" Hidden="true" />
+      <Field Name="_name" Hidden="true" />
+      <Field Name="_salary" Hidden="true" />
+      <Method Name="OnPropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAICBAAAAAAAAAIEAAAAQAggAAAAgAAAAAAAQAAAA=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NumberBoxTest.Models.Product">
+    <Position X="0.5" Y="0.5" Width="3.5" />
+    <Members>
+      <Field Name="_productName" Hidden="true" />
+      <Field Name="_unitPrice" Hidden="true" />
+      <Field Name="_unitsInStock" Hidden="true" />
+      <Method Name="OnPropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAAAAAIAAAAAAAgAAAAABAAAAAgAAoAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

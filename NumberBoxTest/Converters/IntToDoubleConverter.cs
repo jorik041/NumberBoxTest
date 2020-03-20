@@ -9,8 +9,8 @@ namespace NumberBoxTest.Converters {
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
-            return double.IsNaN((double)value) 
-                ? (parameter is object ? System.Convert.ToInt32(parameter) : 0) 
+            return double.IsNaN((double)value)
+                ? (parameter is object ? System.Convert.ToInt32(parameter) : 0)
                 : System.Convert.ToInt32(value);
         }
     }

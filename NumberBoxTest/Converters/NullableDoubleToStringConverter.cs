@@ -10,8 +10,9 @@ namespace NumberBoxTest.Converters {
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language) {
-            var ci = CultureInfo.GetCultureInfo(language);
-            return string.IsNullOrWhiteSpace((string)value) ? (double?)null : double.Parse((string)value, ci);
+            return string.IsNullOrWhiteSpace((string)value) ?
+                (double?)null :
+                double.Parse((string)value, CultureInfo.GetCultureInfo(language));
         }
     }
 }

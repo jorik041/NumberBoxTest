@@ -90,10 +90,10 @@
             </winui:NumberBox>
 
             <winui:NumberBox Header="Bonus"
+                             LargeChange="100"
                              Minimum="0"
                              NumberFormatter="{x:Bind Path=DutchDecimalFormatter, Mode=OneTime}"
                              SmallChange="10"
-                             LargeChange="100"
                              SpinButtonPlacementMode="Compact"
                              Text="{x:Bind Employee.Bonus, ConverterLanguage=nl-NL, Converter={StaticResource NullableDouble2String}}" />
 
